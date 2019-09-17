@@ -4,7 +4,7 @@
     <test name="KaspersckyTest">
         <parameter name="login" value="test09162019@gmail.com" />
         <parameter name="password" value="Qwerty123!" />
-        <parameter name="os" value="iOS" />
+        <parameter name="os" value="Mac" />
         <parameter name="product" value="Safe Kids" />
         <classes>
             <class name="testCases.KasperskyTest"/>

@@ -15,7 +15,9 @@ public class KasperskyTest extends BaseTest {
     @Test
     @Parameters({"login", "password", "os", "product"})
     public void test(String login, String password, String os, String product) {
-        EmailReader.check(login, password);
+        String mail = EmailReader.check(login, password);
+        mail = mail.replaceAll("%253D", "=");
+        System.out.println(mail);
         Browser.enterUrl(PropertyManager.getConfigProperty("url"));
 
         UnauthorizedPage unauthorizedPage = new UnauthorizedPage();
@@ -29,14 +31,9 @@ public class KasperskyTest extends BaseTest {
 
         DownloadsPage downloadsPage = new DownloadsPage();
         downloadsPage.getSelectOSMenu().select(os);
-        downloadsPage.getSelectProductMenu().clickOnDownloadProduct(product);
+        downloadsPage.getSelectProductMenu().clickOnDownloadProduct(product, os);
 
         downloadsPage.getPopUpDownloadProductMenu().sendByMail();
         downloadsPage.getPopUpSendByEmailMenu().submitEmail();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

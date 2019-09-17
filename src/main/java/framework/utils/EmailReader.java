@@ -1,6 +1,14 @@
 package framework.utils;
 
-import javax.mail.*;
+import javax.mail.BodyPart;
+import javax.mail.Flags;
+import javax.mail.Folder;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Store;
 import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
 import java.util.Properties;
@@ -44,7 +52,8 @@ public class EmailReader {
         }
     }
 
-    public static void check(String user, String password) {
+    public static String check(String user, String password) {
+        String result = "";
         try {
             Session emailSession = Session.getInstance(getProps(), new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -61,17 +70,16 @@ public class EmailReader {
 
             Message[] messages = emailFolder.getMessages();
 
-            for (int i = 0, n = messages.length; i < n; i++) {
+           /* for (int i = 0, n = messages.length; i < n; i++) {
                 System.out.println("---------------------------------");
                 System.out.println("Email Number " + (i + 1));
                 System.out.println("Subject: " + messages[i].getSubject());
                 System.out.println("From: " + messages[i].getFrom()[0]);
                 System.out.println("Text: " + getTextFromMessage(messages[i]));
-            }
-
+            }*/
+            result = getTextFromMessage(messages[0]);
             emailFolder.close(false);
             store.close();
-
         } catch (NoSuchProviderException e) {
             e.printStackTrace();
         } catch (MessagingException e) {
@@ -79,6 +87,7 @@ public class EmailReader {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
     }
 
     private static String getTextFromMessage(Message message) throws MessagingException, IOException {
