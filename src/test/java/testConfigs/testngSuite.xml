@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+    <test name="KaspersckyTest">
+        <parameter name="login" value="test09162019@gmail.com" />
+        <parameter name="password" value="Qwerty123!" />
+        <parameter name="os" value="iOS" />
+        <parameter name="product" value="Safe Kids" />
+        <classes>
+            <class name="testCases.KasperskyTest"/>
+        </classes>
+    </test>
+</suite>
