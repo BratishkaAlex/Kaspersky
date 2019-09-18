@@ -8,8 +8,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import java.io.File;
 import java.util.HashMap;
 
-public class PropertiesForBrowser {
-    public static MutableCapabilities getOptions(String browser) {
+class PropertiesForBrowser {
+    static MutableCapabilities getOptions(String browser) {
         switch (browser) {
             case "chrome":
                 return getPropForChrome();

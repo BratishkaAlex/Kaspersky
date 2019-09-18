@@ -30,5 +30,6 @@ public class Browser {
     public static void closeBrowser() {
         LOGGER.warn("Close browser");
         getDriver().quit();
+        driver = null;
     }
 }

@@ -9,27 +9,27 @@ public class PopUpSignInMenu {
     private By inputPasswordLoc = By.xpath("//input[@type='password']");
     private By submitBtnLoc = By.xpath("//button[@data-at-selector='welcomeSignInBtn']");
 
-    private InputField getInputEmailField(){
+    private InputField getInputEmailField() {
         return new InputField(inputLoginLoc, "Field for input login");
     }
 
-    private InputField getInputPasswordField(){
+    private InputField getInputPasswordField() {
         return new InputField(inputPasswordLoc, "Field for input password");
     }
 
-    public void enterLogin(String login){
+    public void enterLogin(String login) {
         getInputEmailField().sendKeys(login);
     }
 
-    public void enterPassword(String password){
+    public void enterPassword(String password) {
         getInputPasswordField().sendKeys(password);
     }
 
-    public void submit(){
+    public void submit() {
         getSubmitButton().click();
     }
 
-    private Button getSubmitButton(){
+    private Button getSubmitButton() {
         return new Button(submitBtnLoc, "Submit login and password button");
     }
 }

@@ -1,32 +1,16 @@
-package framework.utils;
+package framework.mail;
 
-import javax.mail.BodyPart;
-import javax.mail.Flags;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Store;
+import framework.utils.PropertyManager;
+
+import javax.mail.*;
 import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
-import java.util.Properties;
 
 public class EmailReader {
 
-    private static Properties getProps() {
-        Properties properties = new Properties();
-        properties.put("mail.store.protocol", "imaps");
-        properties.put("mail.host", PropertyManager.getConfigProperty("host"));
-        properties.put("mail.port", "995");
-        properties.put("mail.starttls.enable", "true");
-        return properties;
-    }
-
     public static void delete(String user, String password) {
         try {
-            Session emailSession = Session.getInstance(getProps(), new javax.mail.Authenticator() {
+            Session emailSession = Session.getInstance(PropertiesForMail.getProps(), new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication(user, password);
                 }
@@ -39,7 +23,6 @@ public class EmailReader {
             emailFolder.open(Folder.READ_WRITE);
 
             Message[] messages = emailFolder.getMessages();
-            System.out.println("Messages to delete = " + messages.length);
             for (int i = 0; i < messages.length; i++) {
                 messages[i].setFlag(Flags.Flag.DELETED, true);
             }
@@ -55,7 +38,7 @@ public class EmailReader {
     public static String check(String user, String password) {
         String result = "";
         try {
-            Session emailSession = Session.getInstance(getProps(), new javax.mail.Authenticator() {
+            Session emailSession = Session.getInstance(PropertiesForMail.getProps(), new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication(user, password);
                 }
@@ -77,9 +60,12 @@ public class EmailReader {
                 System.out.println("From: " + messages[i].getFrom()[0]);
                 System.out.println("Text: " + getTextFromMessage(messages[i]));
             }*/
-            result = getTextFromMessage(messages[0]);
-            emailFolder.close(false);
-            store.close();
+            if (messages.length > 0) {
+                result = getTextFromMessage(messages[0]);
+                emailFolder.close(false);
+                store.close();
+                return result;
+            }
         } catch (NoSuchProviderException e) {
             e.printStackTrace();
         } catch (MessagingException e) {
@@ -87,7 +73,16 @@ public class EmailReader {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return result;
+        throw new IllegalStateException("Mail wasn't send");
+    }
+
+    public static boolean isMailSend(String user, String password) {
+        try {
+            check(user, password);
+            return true;
+        } catch (IllegalStateException e) {
+            return false;
+        }
     }
 
     private static String getTextFromMessage(Message message) throws MessagingException, IOException {

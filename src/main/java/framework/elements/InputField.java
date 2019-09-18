@@ -9,7 +9,7 @@ public class InputField extends BaseElement {
         super(loc, name);
     }
 
-    public void sendKeys(String text){
+    public void sendKeys(String text) {
         super.getWebElement().sendKeys(text);
     }
 }

@@ -7,12 +7,12 @@ import org.openqa.selenium.By;
 public class NavigationMenu {
     private By downloadsLoc = By.xpath("(//a[contains(@class,'downloads')])[3]");
 
-    private Link getLinkToDownloads(){
+    private Link getLinkToDownloads() {
         Waiter.waitForClickAble(downloadsLoc);
         return new Link(downloadsLoc, "Link to downloads");
     }
 
-    public void navigateToDownloads(){
+    public void navigateToDownloads() {
         getLinkToDownloads().click();
     }
 }
