@@ -53,13 +53,6 @@ public class EmailReader {
 
             Message[] messages = emailFolder.getMessages();
 
-           /* for (int i = 0, n = messages.length; i < n; i++) {
-                System.out.println("---------------------------------");
-                System.out.println("Email Number " + (i + 1));
-                System.out.println("Subject: " + messages[i].getSubject());
-                System.out.println("From: " + messages[i].getFrom()[0]);
-                System.out.println("Text: " + getTextFromMessage(messages[i]));
-            }*/
             if (messages.length > 0) {
                 result = getTextFromMessage(messages[0]);
                 emailFolder.close(false);

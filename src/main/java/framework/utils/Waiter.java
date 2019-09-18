@@ -14,6 +14,8 @@ import java.util.concurrent.TimeUnit;
 public class Waiter {
 
     private static int timeout = Integer.parseInt(PropertyManager.getConfigProperty("timeout"));
+    private static int timeoutForMail = Integer.parseInt(PropertyManager.getConfigProperty("timeoutForWaitingMail"));
+    private static int timeoutForCaptcha = Integer.parseInt(PropertyManager.getConfigProperty("timeoutForCaptcha"));
 
     public static void implicitWait(int timeout) {
         Browser.getDriver().manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
@@ -28,10 +30,10 @@ public class Waiter {
         }
     }
 
-    public static void waitUntilElementIsPresent(By element) {
+    public static void waitUntilElementIsVisible(By element) {
         try {
-            WebDriverWait wait = new WebDriverWait(Browser.getDriver(), 60);
-            wait.until(ExpectedConditions.presenceOfElementLocated(element));
+            WebDriverWait wait = new WebDriverWait(Browser.getDriver(), timeoutForCaptcha);
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -44,7 +46,7 @@ public class Waiter {
     }
 
     public static void waitForMail(String user, String password) {
-        FluentWait wait = new FluentWait(Browser.getDriver()).withTimeout(timeout, TimeUnit.SECONDS).
+        FluentWait wait = new FluentWait(Browser.getDriver()).withTimeout(timeoutForMail, TimeUnit.SECONDS).
                 pollingEvery(1, TimeUnit.SECONDS);
         wait.until((Function) (webDriver) -> EmailReader.isMailSend(user, password));
     }

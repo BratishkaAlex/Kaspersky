@@ -20,7 +20,6 @@ import static org.testng.Assert.assertTrue;
 public class KasperskyTest extends BaseTest {
     private int counter;
 
-    // //button[@id='recaptcha-verify-button']
     @BeforeMethod
     @Parameters({"login", "password"})
     public void cleanMail(String login, String password) {
