@@ -2,22 +2,32 @@ package framework.mail;
 
 import framework.utils.PropertyManager;
 
-import javax.mail.*;
+import javax.mail.BodyPart;
+import javax.mail.Flags;
+import javax.mail.Folder;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Store;
 import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
+
+import static framework.utils.PropertyManager.getPropertyForMail;
 
 public class EmailReader {
 
     public static void delete(String user, String password) {
         try {
-            Session emailSession = Session.getInstance(PropertiesForMail.getProps(), new javax.mail.Authenticator() {
+            Session emailSession = Session.getInstance(PropertyManager.getPropertiesForMail(), new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication(user, password);
                 }
             });
-            Store store = emailSession.getStore("imaps");
+            Store store = emailSession.getStore(getPropertyForMail("mail.store.protocol"));
 
-            store.connect(PropertyManager.getConfigProperty("host"), user, password);
+            store.connect(getPropertyForMail("mail.host"), user, password);
 
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_WRITE);
@@ -38,15 +48,15 @@ public class EmailReader {
     public static String check(String user, String password) {
         String result = "";
         try {
-            Session emailSession = Session.getInstance(PropertiesForMail.getProps(), new javax.mail.Authenticator() {
+            Session emailSession = Session.getInstance(PropertyManager.getPropertiesForMail(), new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication(user, password);
                 }
             });
 
-            Store store = emailSession.getStore("imaps");
+            Store store = emailSession.getStore(getPropertyForMail("mail.store.protocol"));
 
-            store.connect(PropertyManager.getConfigProperty("host"), user, password);
+            store.connect(getPropertyForMail("mail.host"), user, password);
 
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_ONLY);

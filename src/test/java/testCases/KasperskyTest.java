@@ -21,7 +21,7 @@ public class KasperskyTest extends BaseTest {
     private int counter;
 
     @BeforeMethod
-    @Parameters({"login", "password"})
+    @Parameters( {"login", "password"})
     public void cleanMail(String login, String password) {
         LOGGER.info("NEW TEST STARTED");
         LOGGER.info("Deleting all mails before");
@@ -30,7 +30,7 @@ public class KasperskyTest extends BaseTest {
     }
 
     @Test
-    @Parameters({"login", "password", "os", "product"})
+    @Parameters( {"login", "password", "os", "product"})
     public void test(String login, String password, String os, String product) {
         LOGGER.info("Enter https://my.kaspersky.com");
         Browser.enterUrl(PropertyManager.getConfigProperty("url"));

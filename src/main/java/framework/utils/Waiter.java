@@ -41,13 +41,13 @@ public class Waiter {
 
     public static void waitForFile(File file) {
         FluentWait wait = new FluentWait(Browser.getDriver()).withTimeout(timeout, TimeUnit.SECONDS).
-                pollingEvery(1, TimeUnit.SECONDS);
+            pollingEvery(1, TimeUnit.SECONDS);
         wait.until((Function) (webDriver) -> file.exists());
     }
 
     public static void waitForMail(String user, String password) {
         FluentWait wait = new FluentWait(Browser.getDriver()).withTimeout(timeoutForMail, TimeUnit.SECONDS).
-                pollingEvery(1, TimeUnit.SECONDS);
+            pollingEvery(1, TimeUnit.SECONDS);
         wait.until((Function) (webDriver) -> EmailReader.isMailSend(user, password));
     }
 }
