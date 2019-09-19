@@ -4,8 +4,8 @@
     <test name="KaspersckyTest1">
         <parameter name="login" value="test09162019@gmail.com"/>
         <parameter name="password" value="Qwerty123!"/>
-        <parameter name="os" value="Windows"/>
-        <parameter name="product" value="Total Security"/>
+        <parameter name="os" value="Mac"/>
+        <parameter name="product" value="Internet Security"/>
         <classes>
             <class name="testCases.KasperskyTest"/>
         </classes>
