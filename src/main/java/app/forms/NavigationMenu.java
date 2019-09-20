@@ -1,18 +1,16 @@
 package app.forms;
 
 import framework.elements.Link;
-import framework.utils.Waiter;
 import org.openqa.selenium.By;
 
 public class NavigationMenu {
-    private By downloadsLoc = By.xpath("(//a[contains(@class,'downloads')])[3]");
+    private final String PATTERN_FOR_MENU_LINK = "(//a[contains(@class,'%s')])[3]";
 
-    private Link getLinkToDownloads() {
-        Waiter.waitForClickAble(downloadsLoc);
-        return new Link(downloadsLoc, "Link to downloads");
+    public void navigateTo(String menuItem) {
+        getNavigationMenuLink(menuItem).waitAndClick();
     }
 
-    public void navigateToDownloads() {
-        getLinkToDownloads().click();
+    private Link getNavigationMenuLink(String menuItem) {
+        return new Link(By.xpath(String.format(PATTERN_FOR_MENU_LINK, menuItem)), "Link to downloads");
     }
 }

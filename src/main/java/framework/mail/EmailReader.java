@@ -2,88 +2,70 @@ package framework.mail;
 
 import framework.utils.PropertyManager;
 
-import javax.mail.BodyPart;
-import javax.mail.Flags;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Store;
+import javax.mail.*;
 import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
 
-import static framework.utils.PropertyManager.getPropertyForMail;
+import static framework.utils.LoggerUtil.LOGGER;
 
 public class EmailReader {
 
-    public static void delete(String user, String password) {
+    public static void delete(Mail mail) {
         try {
             Session emailSession = Session.getInstance(PropertyManager.getPropertiesForMail(), new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(user, password);
+                    return new PasswordAuthentication(mail.getUser(), mail.getPassword());
                 }
             });
-            Store store = emailSession.getStore(getPropertyForMail("mail.store.protocol"));
-
-            store.connect(getPropertyForMail("mail.host"), user, password);
+            Store store = emailSession.getStore(mail.getProtocol());
+            store.connect(mail.getHost(), mail.getUser(), mail.getPassword());
 
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_WRITE);
 
             Message[] messages = emailFolder.getMessages();
-            for (int i = 0; i < messages.length; i++) {
-                messages[i].setFlag(Flags.Flag.DELETED, true);
+            for (Message message : messages) {
+                message.setFlag(Flags.Flag.DELETED, true);
             }
             emailFolder.close(true);
             store.close();
-        } catch (NoSuchProviderException e) {
-            e.printStackTrace();
         } catch (MessagingException e) {
-            e.printStackTrace();
+            LOGGER.error("Error in deleting messages from email", e);
         }
     }
 
-    public static String check(String user, String password) {
-        String result = "";
+    public static String check(Mail mail) {
         try {
             Session emailSession = Session.getInstance(PropertyManager.getPropertiesForMail(), new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(user, password);
+                    return new PasswordAuthentication(mail.getUser(), mail.getPassword());
                 }
             });
-
-            Store store = emailSession.getStore(getPropertyForMail("mail.store.protocol"));
-
-            store.connect(getPropertyForMail("mail.host"), user, password);
+            Store store = emailSession.getStore(mail.getProtocol());
+            store.connect(mail.getHost(), mail.getUser(), mail.getPassword());
 
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_ONLY);
 
             Message[] messages = emailFolder.getMessages();
-
             if (messages.length > 0) {
-                result = getTextFromMessage(messages[0]);
+                String result = getTextFromMessage(messages[0]);
                 emailFolder.close(false);
                 store.close();
                 return result;
             }
-        } catch (NoSuchProviderException e) {
-            e.printStackTrace();
-        } catch (MessagingException e) {
-            e.printStackTrace();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Error in checking messages from email", e);
         }
-        throw new IllegalStateException("Mail wasn't send");
+        throw new IllegalStateException("Mail wasn't send yet");
     }
 
-    public static boolean isMailSend(String user, String password) {
+    public static boolean isMailSend(Mail mail) {
         try {
-            check(user, password);
+            check(mail);
             return true;
         } catch (IllegalStateException e) {
+            LOGGER.error(e.getMessage());
             return false;
         }
     }

@@ -1,6 +1,7 @@
 package framework.base;
 
 import framework.browser.Browser;
+import framework.utils.Waiter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -39,6 +40,16 @@ public abstract class BaseElement {
         getWebElement().click();
     }
 
+    public void waitAndClick() {
+        LOGGER.info(String.format("Wait for clickable and then click on %s", name));
+        Waiter.waitForClickAble(loc);
+        getWebElement().click();
+    }
+
+    public String getAttribute(String attributeName) {
+        return webElement.getAttribute(attributeName);
+    }
+
     public List<WebElement> findElementsFromCurrent(By loc) {
         return webElement.findElements(loc);
     }
@@ -47,8 +58,11 @@ public abstract class BaseElement {
         return webElement.findElement(loc);
     }
 
-
     protected WebElement getWebElement() {
         return this.webElement;
+    }
+
+    public boolean isEnabled(){
+        return webElement.isEnabled();
     }
 }

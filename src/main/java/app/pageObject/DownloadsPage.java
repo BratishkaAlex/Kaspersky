@@ -1,7 +1,7 @@
 package app.pageObject;
 
-import app.forms.PopUpDownloadProductMenu;
-import app.forms.PopUpSendByEmailMenu;
+import app.forms.PopUpDownloadProductForm;
+import app.forms.PopUpSendByEmailForm;
 import app.forms.SelectOSMenu;
 import app.forms.SelectProductMenu;
 import framework.elements.Label;
@@ -10,19 +10,15 @@ import org.openqa.selenium.By;
 public class DownloadsPage {
     private SelectOSMenu selectOSMenu;
     private SelectProductMenu selectProductMenu;
-    private PopUpDownloadProductMenu popUpDownloadProductMenu;
-    private PopUpSendByEmailMenu popUpSendByEmailMenu;
+    private PopUpDownloadProductForm popUpDownloadProductForm;
+    private PopUpSendByEmailForm popUpSendByEmailForm;
     private By downloadsLabelLoc = By.xpath("//h2[@data-at-selector='downloadBlockTrialAppsTitle']");
 
     public DownloadsPage() {
         selectOSMenu = new SelectOSMenu();
         selectProductMenu = new SelectProductMenu();
-        popUpDownloadProductMenu = new PopUpDownloadProductMenu();
-        popUpSendByEmailMenu = new PopUpSendByEmailMenu();
-    }
-
-    private Label getDownloadLabel() {
-        return new Label(downloadsLabelLoc, "Label for checking downloads page");
+        popUpDownloadProductForm = new PopUpDownloadProductForm();
+        popUpSendByEmailForm = new PopUpSendByEmailForm();
     }
 
     public boolean isDisplayed() {
@@ -37,11 +33,15 @@ public class DownloadsPage {
         return selectProductMenu;
     }
 
-    public PopUpDownloadProductMenu getPopUpDownloadProductMenu() {
-        return popUpDownloadProductMenu;
+    public PopUpDownloadProductForm getPopUpDownloadProductForm() {
+        return popUpDownloadProductForm;
     }
 
-    public PopUpSendByEmailMenu getPopUpSendByEmailMenu() {
-        return popUpSendByEmailMenu;
+    public PopUpSendByEmailForm getPopUpSendByEmailForm() {
+        return popUpSendByEmailForm;
+    }
+
+    private Label getDownloadLabel() {
+        return new Label(downloadsLabelLoc, "Label for checking downloads page");
     }
 }

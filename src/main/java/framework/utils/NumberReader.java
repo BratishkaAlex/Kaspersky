@@ -6,23 +6,31 @@ import java.util.regex.Pattern;
 public class NumberReader {
 
     public static int getIntNumber(String line) {
-        Pattern pattern = Pattern.compile("\\d+");
-        Matcher matcher = pattern.matcher(line);
-        int number = 0;
-        while (matcher.find()) {
-            number = Integer.valueOf(line.substring(matcher.start(), matcher.end()));
-        }
-        return number;
+        return Integer.parseInt(getLineWithNumber("Integer", line));
     }
 
 
     public static Double getDoubleNumber(String line) {
-        Pattern pattern = Pattern.compile("\\d+.\\d+");
-        Matcher matcher = pattern.matcher(line);
-        Double number = 0.;
-        while (matcher.find()) {
-            number = Double.valueOf(line.substring(matcher.start(), matcher.end()));
+        return Double.parseDouble(getLineWithNumber("Double", line));
+    }
+
+    private static String getLineWithNumber(String type, String line) {
+        Pattern pattern;
+        switch (type) {
+            case "Integer":
+                pattern = Pattern.compile("\\d+");
+                break;
+            case "Double":
+                pattern = Pattern.compile("\\d+.\\d+");
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown wanted number type");
         }
-        return number;
+        Matcher matcher = pattern.matcher(line);
+        if (matcher.find()) {
+            return line.substring(matcher.start(), matcher.end());
+        } else {
+            throw new IllegalStateException("Line with number wasn't found");
+        }
     }
 }

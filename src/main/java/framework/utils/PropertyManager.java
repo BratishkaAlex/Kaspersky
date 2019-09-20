@@ -21,11 +21,9 @@ public class PropertyManager {
         try {
             properties.load(new FileReader(new File(pathToPropertiesFile)));
         } catch (FileNotFoundException e) {
-            LOGGER.error("FileNotFoundException", e);
-            System.out.println("Config.property wasn't found");
+            LOGGER.error("Config.property wasn't found", e);
         } catch (IOException e) {
-            LOGGER.error("IOException", e);
-            System.out.println("Error in reading .property file");
+            LOGGER.error("Error in reading .property file", e);
         }
         return properties.getProperty(property);
     }
@@ -36,11 +34,9 @@ public class PropertyManager {
         try {
             properties.load(new FileReader(new File(pathToMailPropertiesFile)));
         } catch (FileNotFoundException e) {
-            LOGGER.error("FileNotFoundException", e);
-            System.out.println("Config.property wasn't found");
+            LOGGER.error("mail.property wasn't found", e);
         } catch (IOException e) {
-            LOGGER.error("IOException", e);
-            System.out.println("Error in reading .property file");
+            LOGGER.error("Error in reading mail.property file", e);
         }
         return properties;
     }
@@ -65,11 +61,9 @@ public class PropertyManager {
                     throw new IllegalArgumentException("Unknown language");
             }
         } catch (FileNotFoundException e) {
-            LOGGER.error("FileNotFoundException", e);
-            System.out.println("Config.property wasn't found");
+            LOGGER.error("Dictionary wasn't found", e);
         } catch (IOException e) {
-            LOGGER.error("IOException", e);
-            System.out.println("Error in reading .property file");
+            LOGGER.error("Error in reading dictionary file", e);
         }
         return properties.getProperty(word);
     }

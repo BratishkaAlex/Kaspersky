@@ -1,7 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-    <test name="KaspersckyTest1">
+    <test name="Windows Anti-Virus">
+        <parameter name="login" value="test09162019@gmail.com"/>
+        <parameter name="password" value="Qwerty123!"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="product" value="Anti-Virus"/>
+        <classes>
+            <class name="testCases.KasperskyTest"/>
+        </classes>
+    </test>
+    <test name="Windows Internet Security">
+        <parameter name="login" value="test09162019@gmail.com"/>
+        <parameter name="password" value="Qwerty123!"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="product" value="Internet Security"/>
+        <classes>
+            <class name="testCases.KasperskyTest"/>
+        </classes>
+    </test>
+    <test name="Windows Total Security">
+        <parameter name="login" value="test09162019@gmail.com"/>
+        <parameter name="password" value="Qwerty123!"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="product" value="Total Security"/>
+        <classes>
+            <class name="testCases.KasperskyTest"/>
+        </classes>
+    </test>
+    <test name="Windows Safe Kids">
+        <parameter name="login" value="test09162019@gmail.com"/>
+        <parameter name="password" value="Qwerty123!"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="product" value="Total Security"/>
+        <classes>
+            <class name="testCases.KasperskyTest"/>
+        </classes>
+    </test>
+    <test name="Windows Password Manager">
+        <parameter name="login" value="test09162019@gmail.com"/>
+        <parameter name="password" value="Qwerty123!"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="product" value="Total Security"/>
+        <classes>
+            <class name="testCases.KasperskyTest"/>
+        </classes>
+    </test>
+    <test name="Mac Internet Security">
         <parameter name="login" value="test09162019@gmail.com"/>
         <parameter name="password" value="Qwerty123!"/>
         <parameter name="os" value="Mac"/>
@@ -10,10 +55,64 @@
             <class name="testCases.KasperskyTest"/>
         </classes>
     </test>
-    <test name="KaspersckyTest2">
+    <test name="Mac Password Manager">
+        <parameter name="login" value="test09162019@gmail.com"/>
+        <parameter name="password" value="Qwerty123!"/>
+        <parameter name="os" value="Mac"/>
+        <parameter name="product" value="Password Manager"/>
+        <classes>
+            <class name="testCases.KasperskyTest"/>
+        </classes>
+    </test>
+    <test name="Mac Safe Kids">
+        <parameter name="login" value="test09162019@gmail.com"/>
+        <parameter name="password" value="Qwerty123!"/>
+        <parameter name="os" value="Mac"/>
+        <parameter name="product" value="Safe Kids"/>
+        <classes>
+            <class name="testCases.KasperskyTest"/>
+        </classes>
+    </test>
+    <test name="Android Internet Security">
         <parameter name="login" value="test09162019@gmail.com"/>
         <parameter name="password" value="Qwerty123!"/>
         <parameter name="os" value="Android"/>
+        <parameter name="product" value="Internet Security"/>
+        <classes>
+            <class name="testCases.KasperskyTest"/>
+        </classes>
+    </test>
+    <test name="Android Password Manager">
+        <parameter name="login" value="test09162019@gmail.com"/>
+        <parameter name="password" value="Qwerty123!"/>
+        <parameter name="os" value="Android"/>
+        <parameter name="product" value="Password Manager"/>
+        <classes>
+            <class name="testCases.KasperskyTest"/>
+        </classes>
+    </test>
+    <test name="Android Safe Kids">
+        <parameter name="login" value="test09162019@gmail.com"/>
+        <parameter name="password" value="Qwerty123!"/>
+        <parameter name="os" value="Android"/>
+        <parameter name="product" value="Safe Kids"/>
+        <classes>
+            <class name="testCases.KasperskyTest"/>
+        </classes>
+    </test>
+    <test name="iOS Password Manager">
+        <parameter name="login" value="test09162019@gmail.com"/>
+        <parameter name="password" value="Qwerty123!"/>
+        <parameter name="os" value="iOS"/>
+        <parameter name="product" value="Password Manager"/>
+        <classes>
+            <class name="testCases.KasperskyTest"/>
+        </classes>
+    </test>
+    <test name="iOS Safe Kids">
+        <parameter name="login" value="test09162019@gmail.com"/>
+        <parameter name="password" value="Qwerty123!"/>
+        <parameter name="os" value="iOS"/>
         <parameter name="product" value="Safe Kids"/>
         <classes>
             <class name="testCases.KasperskyTest"/>
