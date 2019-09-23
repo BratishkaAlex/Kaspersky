@@ -2,8 +2,7 @@ package framework.utils;
 
 import com.google.common.base.Function;
 import framework.browser.Browser;
-import framework.mail.EmailReader;
-import framework.mail.Mail;
+import framework.models.Mail;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -40,15 +39,15 @@ public class Waiter {
         }
     }
 
-    public static void waitForFile(File file) {
+    public static void waitWhileFileDownload(File file) {
         FluentWait wait = new FluentWait(Browser.getDriver()).withTimeout(timeout, TimeUnit.SECONDS).
-                pollingEvery(1, TimeUnit.SECONDS);
+            pollingEvery(1, TimeUnit.SECONDS);
         wait.until((Function) (webDriver) -> file.exists());
     }
 
-    public static void waitForMail(Mail mail) {
+    public static void waitWhileMailReceived(Mail mail) {
         FluentWait wait = new FluentWait(Browser.getDriver()).withTimeout(timeoutForMail, TimeUnit.SECONDS).
-                pollingEvery(1, TimeUnit.SECONDS);
+            pollingEvery(1, TimeUnit.SECONDS);
         wait.until((Function) (webDriver) -> EmailReader.isMailSend(mail));
     }
 }

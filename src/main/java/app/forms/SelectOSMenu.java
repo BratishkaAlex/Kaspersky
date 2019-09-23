@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 public class SelectOSMenu {
     private final String PATTERN_FOR_OS = "//div[@data-os='%d']";
 
-    public void select(String os) {
+    public void selectOs(String os) {
         getButtonForOs(os).waitAndClick();
     }
 

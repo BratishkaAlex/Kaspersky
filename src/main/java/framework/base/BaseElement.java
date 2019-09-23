@@ -62,7 +62,7 @@ public abstract class BaseElement {
         return this.webElement;
     }
 
-    public boolean isEnabled(){
+    public boolean isEnabled() {
         return webElement.isEnabled();
     }
 }

@@ -5,10 +5,10 @@ import org.openqa.selenium.By;
 
 public class SelectProductMenu {
     private final String ID_ATTRIBUTE_NAME = "data-application-id";
-    private final String DOWNLOAD_PRODUCT_PATTERN = "//kl-carousel-item[@aria-hidden='false']//div[@class='u-productLogotype__name' and contains(text(),'%s')]" +
-            "//..//..//..//..//button[contains(@class,'jsDownloadApplications')]";
+    private final String DOWNLOAD_PRODUCT_PATTERN = "//kl-carousel-item[@aria-hidden='false']//button[contains(@class, 'jsDownloadApplications')]" +
+        "[..//div[contains(text(), '%s')]]";
 
-    public void clickOnDownloadProduct(String product) {
+    public void downloadProduct(String product) {
         getDownloadProductButton(product).waitAndClick();
     }
 

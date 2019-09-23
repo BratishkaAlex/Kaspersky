@@ -1,8 +1,10 @@
 package app.appUtils;
 
+import static app.Enums.Os.OsNames;
+
 public class IdProvider {
     public static int getOSId(String os) {
-        switch (Enums.OS.valueOf(os)) {
+        switch (OsNames.valueOf(os)) {
             case Windows:
                 return 1;
             case Mac:

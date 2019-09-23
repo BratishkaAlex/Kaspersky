@@ -5,14 +5,13 @@ import framework.elements.InputField;
 import org.openqa.selenium.By;
 
 public class PopUpSignInMenu {
-    private String PATTERN_FOR_INPUT_FIELD = "//input[@type='%s']";
+    private By inputLoginLoc = By.xpath("//input[@type='email']");
+    private By inputPasswordLoc = By.xpath("//input[@type='password']");
     private By submitBtnLoc = By.xpath("//button[@data-at-selector='welcomeSignInBtn']");
 
-    public void enterValue(String inputType, String value) {
-        getInputField(inputType).sendKeys(value);
-    }
-
-    public void submit() {
+    public void logIn(String login, String password) {
+        getLoginField().sendKeys(login);
+        getPasswordField().sendKeys(password);
         getSubmitButton().click();
     }
 
@@ -20,7 +19,11 @@ public class PopUpSignInMenu {
         return new Button(submitBtnLoc, "Submit login and password button");
     }
 
-    private InputField getInputField(String inputType) {
-        return new InputField(By.xpath(String.format(PATTERN_FOR_INPUT_FIELD, inputType)), String.format("Field for input %s", inputType));
+    private InputField getLoginField() {
+        return new InputField(inputLoginLoc, "Field for input login");
+    }
+
+    private InputField getPasswordField() {
+        return new InputField(inputPasswordLoc, "Field for input password");
     }
 }
