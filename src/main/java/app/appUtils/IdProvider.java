@@ -1,6 +1,6 @@
 package app.appUtils;
 
-import static app.Enums.Os.OsNames;
+import static app.enums.Os.OsNames;
 
 public class IdProvider {
     public static int getOSId(String os) {

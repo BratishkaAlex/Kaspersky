@@ -1,4 +1,4 @@
-package app.Enums;
+package app.enums;
 
 public class Os {
     public enum OsNames {

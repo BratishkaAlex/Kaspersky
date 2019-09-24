@@ -14,7 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import static app.Enums.NavigationMenu.NavigationMenuItems;
+import static app.enums.NavigationMenu.NavigationMenuItems;
 import static framework.utils.LoggerUtil.LOGGER;
 import static framework.utils.LoggerUtil.step;
 import static framework.utils.PropertyManager.getPropertyForMail;
